@@ -4,6 +4,8 @@ Displays a startup banner with configuration details.
 """
 
 import uvicorn
+import signal
+import sys
 from rich.panel import Panel
 from rich.rule import Rule
 from rich.text import Text
@@ -12,7 +14,16 @@ from claude_proxy import logger
 from claude_proxy.config import settings
 from claude_proxy.logger import console
 
+
+def handle_exit_signal(signal_received, frame):
+    print("\nGracefully shutting down...")
+    sys.exit(0)
+
+
 if __name__ == "__main__":
+    signal.signal(signal.SIGINT, handle_exit_signal)
+    signal.signal(signal.SIGTERM, handle_exit_signal)
+
     console.print(
         r"""[bold blue]
            /$$                           /$$

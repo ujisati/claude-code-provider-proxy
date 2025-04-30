@@ -12,8 +12,7 @@ import fastapi
 import openai
 from fastapi import Request
 from fastapi.responses import JSONResponse, Response, StreamingResponse
-from openai.types.chat import (ChatCompletionMessageParam,
-                               ChatCompletionToolParam)
+from openai.types.chat import ChatCompletionMessageParam, ChatCompletionToolParam
 from pydantic import ValidationError
 
 from . import conversion, logger, models, token_counter
@@ -289,7 +288,7 @@ async def count_tokens_endpoint(request: Request) -> models.TokenCountResponse:
     body = await request.json()
 
     request_data = models.TokenCountRequest.model_validate(body)
-    
+
     token_count = token_counter.count_tokens_for_request(
         messages=request_data.messages,
         system=request_data.system,
@@ -307,7 +306,7 @@ async def count_tokens_endpoint(request: Request) -> models.TokenCountResponse:
             data={
                 "duration_ms": duration_ms,
                 "token_count": token_count,
-                "model": request_data.model
+                "model": request_data.model,
             },
         )
     )
@@ -316,6 +315,34 @@ async def count_tokens_endpoint(request: Request) -> models.TokenCountResponse:
 
 @app.get("/", include_in_schema=False, tags=["Health"])
 async def root() -> JSONResponse:
+    """Basic health check and information endpoint."""
+    logger.debug(
+        LogRecord(
+            event=LogEvent.HEALTH_CHECK.value,
+            message="Root health check endpoint accessed",
+        )
+    )
+    return JSONResponse(
+        {"proxy": settings.app_name, "version": settings.app_version, "status": "ok"}
+    )
+
+
+@app.get("/health", include_in_schema=False, tags=["Health"])
+async def health() -> JSONResponse:
+    """Basic health check and information endpoint."""
+    logger.debug(
+        LogRecord(
+            event=LogEvent.HEALTH_CHECK.value,
+            message="Root health check endpoint accessed",
+        )
+    )
+    return JSONResponse(
+        {"proxy": settings.app_name, "version": settings.app_version, "status": "ok"}
+    )
+
+
+@app.get("/status", include_in_schema=False, tags=["Status"])
+async def status() -> JSONResponse:
     """Basic health check and information endpoint."""
     logger.debug(
         LogRecord(

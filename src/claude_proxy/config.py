@@ -14,6 +14,7 @@ class Settings(BaseSettings):
     small_model_name: str
     openrouter_base_url: str = "https://openrouter.ai/api/v1"
     referrer_url: str = "http://localhost:8082/ClaudeProxy"
+    max_tokens: int = 4096
 
     app_name: str = "ClaudeProxy"
     app_version: str = "0.1"

@@ -13,5 +13,6 @@ client = openai.AsyncClient(
     default_headers={
         "HTTP-Referer": settings.referrer_url,
         "X-Title": settings.app_name,
+        "max_tokens": settings.max_tokens,
     },
 )
