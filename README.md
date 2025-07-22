@@ -65,6 +65,9 @@ Use those when launching `claude`, not the proxy.
 uv run src/main.py
 ```
 
+Additional environment variables for local development:
+- `RELOAD=true/false` - Enable/disable auto-reload on file changes (default: true for local dev, false in Docker)
+
 **Docker:**
 ```bash
 # Build and run with docker-compose

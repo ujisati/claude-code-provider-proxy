@@ -36,6 +36,25 @@ from rich.text import Text
 load_dotenv()
 
 
+def is_running_in_docker() -> bool:
+    """Detect if the application is running inside a Docker container."""
+    try:
+        # Check for Docker-specific files
+        if os.path.exists("/.dockerenv"):
+            return True
+        
+        # Check cgroup to see if we're in a container
+        if os.path.exists("/proc/1/cgroup"):
+            with open("/proc/1/cgroup", "r") as f:
+                content = f.read()
+                if "docker" in content or "containerd" in content:
+                    return True
+    except Exception:
+        pass
+    
+    return False
+
+
 class Settings(BaseSettings):
     """Application settings loaded from environment variables."""
 
@@ -54,6 +73,16 @@ class Settings(BaseSettings):
     host: str = "127.0.0.1"
     port: int = 8080
     reload: bool = True
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        
+        # Docker-specific overrides
+        if is_running_in_docker():
+            # Force reload to False in Docker
+            self.reload = False
+            # Disable file logging in Docker - use stdout only
+            self.log_file_path = None
 
 
 settings = Settings()
