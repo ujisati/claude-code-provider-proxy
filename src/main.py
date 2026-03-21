@@ -16,6 +16,7 @@ from datetime import datetime, timezone
 from logging.config import dictConfig
 from typing import (Any, AsyncGenerator, Awaitable, Callable, Dict, List,
                     Literal, Optional, Tuple, Union, cast)
+import re
 
 import fastapi
 import openai
@@ -714,6 +715,8 @@ def convert_anthropic_to_openai_messages(
                 )
             )
         system_text_content = "\n".join(system_texts)
+
+    system_text_content = re.sub(r'^x-anthropic-billing-header: .*?; cc_entrypoint=.*?; cch=.*?;\n', '', system_text_content)
 
     if system_text_content:
         openai_messages.append({"role": "system", "content": system_text_content})
