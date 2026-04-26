@@ -1,0 +1,46 @@
+proxy_api_key: "my-secret-proxy-key"
+
+mappings:
+  big_model: opus_4_7
+  medium_model: qwen-3.6-plus
+  small_model: minimax_m2.7
+
+connections:
+  internal_kimi_k2_5:
+    base_url: "https://api.eliza.yandex.net/raw/internal/kimi-k2-5/v1/"
+    api_key: "OAuth y1__xCapOORpdT-ARiuKyCqndUCMz-qrx_dO4vJCyeq3IL4tt2EuBk"
+    target_model: "kimi-k2-5"
+
+  internal_glm_4_7:
+    base_url: "https://api.eliza.yandex.net/raw/internal/glm-4-7/v1/"
+    api_key: "OAuth y1__xCapOORpdT-ARiuKyCqndUCMz-qrx_dO4vJCyeq3IL4tt2EuBk"
+    target_model: "glm-4-7"
+
+  sonnet_4_6:
+    base_url: "https://api.eliza.yandex.net/raw/openrouter/v1/"
+    api_key: "OAuth y1__xCapOORpdT-ARiuKyCqndUCMz-qrx_dO4vJCyeq3IL4tt2EuBk"
+    target_model: "anthropic/claude-sonnet-4.6"
+    provider: ["Anthropic"]
+
+  opus_4_7:
+    base_url: "https://api.eliza.yandex.net/raw/openrouter/v1/"
+    api_key: "OAuth y1__xCapOORpdT-ARiuKyCqndUCMz-qrx_dO4vJCyeq3IL4tt2EuBk"
+    target_model: "anthropic/claude-opus-4.7"
+    provider: ["Anthropic"]
+
+  minimax_m2.7:
+    base_url: "https://api.eliza.yandex.net/raw/openrouter/v1/"
+    api_key: "OAuth y1__xCapOORpdT-ARiuKyCqndUCMz-qrx_dO4vJCyeq3IL4tt2EuBk"
+    target_model: "minimax/minimax-m2.7"
+    provider: ["minimax/fp8", "fireworks"]
+
+  glm-5.1:
+    base_url: "https://api.eliza.yandex.net/raw/openrouter/v1/"
+    api_key: "OAuth y1__xCapOORpdT-ARiuKyCqndUCMz-qrx_dO4vJCyeq3IL4tt2EuBk"
+    target_model: "z-ai/glm-5.1"
+    provider: ["friendli", "z-ai"]
+  
+  qwen-3.6-plus:
+    base_url: "https://api.eliza.yandex.net/raw/openrouter/v1/"
+    api_key: "OAuth y1__xCapOORpdT-ARiuKyCqndUCMz-qrx_dO4vJCyeq3IL4tt2EuBk"
+    target_model: "qwen/qwen3.6-plus"

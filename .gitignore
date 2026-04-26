@@ -174,9 +174,18 @@ cython_debug/
 .pypirc
 
 .gitconfig
-.env
+# Custom Project Ignores
 log.jsonl
-.python-version
-.aider*
-
-**/.claude/settings.local.json
+*.log
+models.json
+internal_models.json
+config.yaml
+.env
+.agent/
+.pytest_cache/
+.venv/
+__pycache__/
+*.code-workspace
+proxy_debug.log
+docs/
+sandbox/
