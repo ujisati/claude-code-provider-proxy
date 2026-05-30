@@ -56,6 +56,16 @@ SMALL_MODEL_NAME=google/gemini-2.0-flash-lite-001
 LOG_LEVEL=DEBUG
 ```
 
+For Tuning Engines, use its OpenAI-compatible gateway:
+
+```env
+OPENAI_API_KEY=sk-te-your-tuning-engines-key
+BASE_URL=https://api.tuningengines.com/v1
+BIG_MODEL_NAME=llama-3.3-70b-fp8
+SMALL_MODEL_NAME=qwen-2.5-coder-32b
+LOG_LEVEL=DEBUG
+```
+
 A list of known working models can be found at the bottom of that README.md.
 
 For more configuration options, see the `Settings` class in `src/main.py`.
